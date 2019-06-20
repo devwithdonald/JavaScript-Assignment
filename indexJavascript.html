@@ -216,6 +216,16 @@
 
           //calls for question 8 
           document.getElementById("firstForm").addEventListener("change", colorChanger);
+
+          //calls for question 9 
+          let customerRows = document.getElementsByClassName('empName');
+          for (let i = 0; i < customerRows.length; i++){
+                customerRows[i].addEventListener("mouseover", function(event) {onEmployeeHover(this, event);}, false);
+            }
+
+          //calls for question 10
+        //  document.getElementById(
+          
         } 
 
 
@@ -294,21 +304,43 @@
       }
 
     
-
-      
-
-
       // 9. Show/Hide Event
       // NOTE: Write unobtrusive Javascript
       // When user hovers over an employees name:
       // 	Hide the name if shown.
       // 	Show the name if hidden.
+      function onEmployeeHover(element, event){
+          element.style.visibility = "hidden";
+        
+          element.onmouseout = function(){
+            element.style.visibility = "visible";
+            
+          }
+      }
+      
 
       // 10. Current Time
       // Regarding this element:
       // 	<h5 id="currentTime"></h5>
       // Show the current time in this element in this format: 9:05:23 AM
       // The time should be accurate to the second without having to reload the page.
+      let intervalID = setInterval(showCurrentTime, 1000);
+      
+      function showCurrentTime(){
+        let currentTime = document.getElementById("currentTime");
+        let today = new Date();
+        let ampm;
+
+        if(today.getHours() > 12 ){
+          ampm = 'pm';
+        } else {
+          ampm = 'am';
+        }
+
+        let time = (today.getHours() % 12) + ':' + today.getMinutes() + ':' + today.getSeconds() + ' ' + ampm;
+        
+        currentTime.innerText = time;
+      }
 
       // 11. Delay
       // Regarding this element:
