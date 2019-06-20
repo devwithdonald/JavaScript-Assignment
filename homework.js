@@ -96,9 +96,19 @@ function isEven(someNum){
 // Define function isPalindrome(someStr)
 // Return true if someStr is a palindrome, otherwise return false
 function isPalindrome(someStr){
-    
+    someStr = someStr.replace(/[^\w\s]/g,"");
+    someStr = someStr.replace(/\s+/g, "");
+    someStr = someStr.toLowerCase();
+
+    if (someStr === someStr.split("").reverse().join("")){
+        return true;
+    } else {
+        return false;
+    }
 }
 
+
+//TODO NOT DONE
 // 8. Shapes
 // Define function: printShape(shape, height, character)
 // shape is a String and is either "Square", "Triangle", "Diamond".
@@ -120,10 +130,36 @@ function isPalindrome(someStr){
 // *****
 //  ***
 //   *
+function printShape(shape, height, character){
+    switch(shape){
+        case 'Square':
+            for (let i = 0; i < height; i++){
+                for (let j = 0; j < height; j++){
+                    console.log(character);
+                }
+               console.log('\n');
+            }
+            break;
+        case 'Triangle':
+            break;
+        case 'Diamond':
+            break;
+        default:
+            console.log('Not a valid shape.');
+    }
+
+}
 
 // 9. Object literal
 // Define function traverseObject(someObj)
 // Print every property and it's value.
+function traverseObject(someObj){
+    const pairs = Object.entries(someObj);
+
+    for (const[key,value] of pairs){
+        console.log(key,value);
+    }
+}
 
 // 10. Delete Element
 // Define function deleteElement(someArr)
@@ -131,6 +167,13 @@ function isPalindrome(someStr){
 // Delete the third element in the array.
 // Print length
 // The lengths should be the same.
+function deleteElement(someArr){
+    console.log(someArr.length);
+    
+    delete someArr[2];
+    
+    console.log(someArr.length);
+}
 
 // 11. Splice Element
 // Define function spliceElement(someArr)
@@ -138,13 +181,27 @@ function isPalindrome(someStr){
 // Splice the third element in the array.
 // Print length
 // The lengths should be one less than the original length.
+function spliceElement(someArr){
+    console.log(someArr.length);
+
+    someArr.splice(2,1);
+
+    console.log(someArr.length);
+}
 
 // 12. Defining an object using a constructor
 // Define a function Person(name, age)
 // The following line should set a Person object to the variable john:
 // 	var john = new Person("John", 30);
+function Person(name, age){
+    this.name = name;
+    this.age = age;
+}
 
 // 13. Defining an object using an object literal
 // Define function getPerson(name, age)
 // The following line should set a Person object to the variable john:
 // 	var john = getPerson("John", 30);
+function getPerson(name, age){
+    return new Person(name, age);
+}
