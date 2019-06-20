@@ -73,7 +73,7 @@ function substring(someStr, length, offset){
         return;
     }
 
-    return someStr.substring(offset, length + offset);
+    return someStr.substring(offset, length + offset + 1);
    
 }
 
@@ -203,5 +203,6 @@ function Person(name, age){
 // The following line should set a Person object to the variable john:
 // 	var john = getPerson("John", 30);
 function getPerson(name, age){
-    return new Person(name, age);
+    let Person = { name: name, age: age }
+    return Person
 }

@@ -71,7 +71,13 @@
         <input type="text" data-customAttr="24" /><br />
         <input type="radio" name="favoriteAnimal" value="dog" />Dog<br />
         <input type="radio" name="favoriteColor" value="blue" />Blue<br />
-        <input id="num1" class="nums" type="text" onchange="numberChange()" value="input"/><br />
+        <input
+          id="num1"
+          class="nums"
+          type="text" 
+         
+          value="input"
+        /><br />
         <input type="radio" name="favoriteAnimal" value="cat" />Cat<br />
         <input type="radio" name="favoriteColor" value="red" />Red<br />
         <input type="radio" name="favoriteAnimal" value="horse" />Horse<br />
@@ -92,7 +98,13 @@
           <option value="hiking">Hiking</option>
           <option value="programming" selected="selected">Programming</option>
         </select>
-        <input id="num2" class="nums" type="text" onchange="numberChange()" value="input"/>
+        <input
+          id="num2"
+          class="nums"
+          type="text"
+          
+          value="input"
+        />
         <select name="skills">
           <option value="java">Java</option>
           <option value="net">.NET</option>
@@ -134,18 +146,17 @@
       // Define function getAnchorChildren()
       // Find all anchor elements with a <span> child.
       // Print the contents of <span>
-      function getAnchorChildren(){
-        let anchor = document.getElementsByTagName('a');
+      function getAnchorChildren() {
+        let anchor = document.getElementsByTagName("a");
 
-        for(let i = 0; i < anchor.length; i++){
-          if(anchor[i].hasChildNodes()){
+        for (let i = 0; i < anchor.length; i++) {
+          if (anchor[i].hasChildNodes()) {
             //iterate through child nodes
-            for(let j = 0; j < anchor[i].childNodes.length; j++){    
-              if (anchor[i].childNodes[j].tagName === 'SPAN'){
+            for (let j = 0; j < anchor[i].childNodes.length; j++) {
+              if (anchor[i].childNodes[j].tagName === "SPAN") {
                 console.log(anchor[i].childNodes[j].innerText);
               }
             }
-            
           }
         }
       }
@@ -154,13 +165,18 @@
       // Define function getHobbies()
       // Find the checked option in the 'hobbies' select element.
       // Print the value and the contents.
-      function getHobbies(){
-        let hobbies = document.getElementsByName('hobbies');
+      function getHobbies() {
+        let hobbies = document.getElementsByName("hobbies");
 
-        for (let i = 0; i < hobbies.length; i++){
-          for (let j = 0; j < hobbies[i].children.length; j++){
-            if (hobbies[i].children[j].selected){
-              console.log("value: " + hobbies[i].children[j].getAttribute('value') + " contents: " + hobbies[i].children[j].innerText);
+        for (let i = 0; i < hobbies.length; i++) {
+          for (let j = 0; j < hobbies[i].children.length; j++) {
+            if (hobbies[i].children[j].selected) {
+              console.log(
+                "value: " +
+                  hobbies[i].children[j].getAttribute("value") +
+                  " contents: " +
+                  hobbies[i].children[j].innerText
+              );
             }
           }
         }
@@ -171,11 +187,11 @@
       // Find all elements with "data-customAttr" attribute
       // Print the value of the attribute.
       // Print the element that has the attribute.
-      function getCustomAttribute(){
-        let customAttr = document.querySelectorAll('[data-customAttr]');
+      function getCustomAttribute() {
+        let customAttr = document.querySelectorAll("[data-customAttr]");
 
-        for (let i = 0; i < customAttr.length; i++){
-          console.log(customAttr[i].getAttribute('data-customAttr'));
+        for (let i = 0; i < customAttr.length; i++) {
+          console.log(customAttr[i].getAttribute("data-customAttr"));
           console.log(customAttr[i].tagName);
         }
       }
@@ -190,31 +206,53 @@
       // Add <input> element values.
       // Put the sum in the <span> element.
       // If values cannot be added, put "Cannot add" in the <span> element
+        window.onload = function () {
+          //calls for question 6
+          document.getElementById("num1").addEventListener("change", numberChange);
+          document.getElementById("num2").addEventListener("change", numberChange);
 
-      function numberChange(){
+          //calls for question 7
+          document.getElementsByName("skills")[0].addEventListener("change", skillSelect);
+
+          //calls for question 8 
+          document.getElementById("firstForm").addEventListener("change", colorChanger);
+        } 
+
+
+      function numberChange() {
         let number1 = document.getElementById("num1").value;
         let number2 = document.getElementById("num2").value;
-        sumIt(number1,number2);
+        sumIt(number1, number2);
       }
 
-      function sumIt(number1, number2){
-        if(isNaN(number1) || isNaN(number2)){
-          document.getElementById("sum").innerText = 'Cannot add';
-        } else{
+      function sumIt(number1, number2) {
+        if (isNaN(number1) || isNaN(number2)) {
+          document.getElementById("sum").innerText = "Cannot add";
+        } else {
           number1 = parseInt(number1);
           number2 = parseInt(number2);
           let sum = number1 + number2;
           document.getElementById("sum").innerText = sum;
         }
-        
       }
-    
 
       // 7. Skills Event
       // NOTE: Write unobtrusive Javascript
       // When user selects a skill, create an alert with a message similar to:
       // 	"Are you sure CSS is one of your skills?"
-      // NOTE: no alert should appear when user deselects a skill.
+      // NOTE: no alert should appear when user deselects a skill.  
+      function skillSelect() {
+
+        let skill = document.getElementsByName("skills");
+
+        for (let i = 0; i < skill.length; i++) {
+          for (let j = 0; j < skill[i].children.length; j++) {
+            if (skill[i].children[j].selected) {
+              alert(`Are you sure ${skill[i].children[j].innerText} is one of your skills?`);
+            }
+          }
+        }
+      }
 
       // 8. Favorite Color Event
       // NOTE: Write unobtrusive Javascript
@@ -223,6 +261,42 @@
       // 	"So you like green more than blue now?"
       // In this example, green is the new value and blue is the old value.
       // Make the background color (of all favoriteColor radio buttons) the newly selected favoriteColor
+      function colorChanger(){
+        let favoriteColor = document.getElementsByName('favoriteColor');
+
+        for (let i = 0; i < favoriteColor.length; i++){
+          if(favoriteColor[i].checked){
+
+            alert(`So you like ${favoriteColor[i].value} more than ${value.getVal()} now?`);
+            
+            value.setVal(favoriteColor[i].value);
+
+          }
+        }
+        radioColorChanger(favoriteColor);
+      }
+
+      
+      function radioColorChanger(favoriteColor){
+        for (let i = 0; i < favoriteColor.length; i++){
+          favoriteColor[i].style.backgroundColor = `${value.getVal()}`;
+        }
+      }
+
+      let value = {
+          val: '',
+          getVal: function() {
+            return this.val;
+          },
+          setVal: function (valNew){
+            this.val = valNew;
+          }
+      }
+
+    
+
+      
+
 
       // 9. Show/Hide Event
       // NOTE: Write unobtrusive Javascript
