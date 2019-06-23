@@ -108,7 +108,7 @@ function isPalindrome(someStr){
 }
 
 
-//TODO NOT DONE
+
 // 8. Shapes
 // Define function: printShape(shape, height, character)
 // shape is a String and is either "Square", "Triangle", "Diamond".
